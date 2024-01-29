@@ -14,7 +14,7 @@ export const getGRPC = () => {
         'app/payment/user/service/v1/user.proto',
       ],
       loader: {
-        includeDirs: ['./node_modules/@factory/protobuf'],
+        includeDirs: ['./node_modules/@clv-factory/protobuf/dist'],
         defaults: true,
       },
     },

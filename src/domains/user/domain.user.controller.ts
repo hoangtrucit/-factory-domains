@@ -4,7 +4,7 @@ import {
   CreateUserRequest,
   UserServiceController,
   UserServiceControllerMethods,
-} from '@factory/protobuf/gRPC/generate/index.app.payment.user.service.v1';
+} from '@clv-factory/protobuf/dist/gRPC/generate/index.app.payment.user.service.v1';
 
 @Controller('user')
 @UserServiceControllerMethods()
