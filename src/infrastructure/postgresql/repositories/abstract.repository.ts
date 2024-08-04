@@ -21,6 +21,8 @@ export interface IRepository<Entity extends ObjectLiteral> {
 
   getRepository(): Repository<Entity>;
 
+  getDataSource(): DataSource;
+
   countBy(
     where: FindOptionsWhere<Entity> | FindOptionsWhere<Entity>[],
   ): Promise<number>;
@@ -30,7 +32,7 @@ export class AbstractRepository<Entity extends ObjectLiteral>
   implements IRepository<Entity>
 {
   protected readonly repository: Repository<Entity>;
-  public readonly dataSource: DataSource;
+  private readonly dataSource: DataSource;
 
   constructor(baseRepository: Repository<Entity>, dataSource?: DataSource) {
     this.repository = baseRepository;
@@ -87,5 +89,9 @@ export class AbstractRepository<Entity extends ObjectLiteral>
 
   getRepository(): Repository<Entity> {
     return this.repository;
+  }
+
+  getDataSource(): DataSource {
+    return this.dataSource;
   }
 }

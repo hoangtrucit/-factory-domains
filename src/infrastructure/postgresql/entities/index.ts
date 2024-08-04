@@ -1,6 +1,6 @@
 import { PostEntity } from './post.entity';
-import { UserEntity } from './user.entity';
+import { AccountEntity } from './account.entity';
 
-export default [UserEntity, PostEntity];
+export default [AccountEntity, PostEntity];
 
-export { UserEntity, PostEntity };
+export { AccountEntity as UserEntity, PostEntity };

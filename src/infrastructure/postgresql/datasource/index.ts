@@ -18,3 +18,7 @@ export const AppDataSource = new DataSource({
   migrationsTransactionMode: 'each',
   synchronize: false,
 });
+
+export const dataSourceRepository = new DataSource({
+  type: 'postgres',
+});

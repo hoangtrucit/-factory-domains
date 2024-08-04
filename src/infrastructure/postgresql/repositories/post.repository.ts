@@ -5,6 +5,7 @@ import { Repository } from 'typeorm';
 
 import { AbstractRepository, IRepository } from './abstract.repository';
 import { PostEntity } from '../entities';
+import { dataSourceRepository } from '../datasource';
 
 export const I_POST_REPOSITORY = 'I_POST_REPOSITORY';
 
@@ -19,6 +20,6 @@ export class PostRepository
     @InjectRepository(PostEntity)
     repository: Repository<PostEntity>,
   ) {
-    super(repository);
+    super(repository, dataSourceRepository);
   }
 }

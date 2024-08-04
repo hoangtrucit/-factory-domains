@@ -1,56 +1,67 @@
 import { DynamicModule, Global, Module } from '@nestjs/common';
-import { TypeOrmModule } from '@nestjs/typeorm';
+import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
 
 import { PostgresConnectionCredentialsOptions } from 'typeorm/driver/postgres/PostgresConnectionCredentialsOptions';
 import entities from './entities';
 import { SnakeNamingStrategy } from './datasource/naming.strategy';
 import {
-  I_USER_REPOSITORY,
-  UserRepository,
-} from './repositories/user.repository';
+  I_ACCOUNT_REPOSITORY,
+  AccountRepository,
+} from './repositories/account.repository';
 import {
   I_POST_REPOSITORY,
   PostRepository,
 } from './repositories/post.repository';
+import { dataSourceRepository } from './datasource';
 
 @Global()
 @Module({})
 export class RepositoriesModule {
   static forRoot(options: PostgresConnectionCredentialsOptions): DynamicModule {
+    const config: TypeOrmModuleOptions | PostgresConnectionCredentialsOptions =
+      {
+        type: 'postgres',
+        database: options.database,
+        host: options.host,
+        port: options.port,
+        username: options.username,
+        password: options.password,
+        synchronize: false,
+        logging: true,
+        entities: entities,
+        namingStrategy: new SnakeNamingStrategy(),
+        migrations: [__dirname + '/migrations/*{.ts,.js}'],
+        migrationsRun: true,
+        migrationsTransactionMode: 'each',
+        migrationsTableName: 'migrations_table',
+      };
+
+    dataSourceRepository.setOptions(config);
+
     return {
       imports: [
         TypeOrmModule.forRootAsync({
           useFactory: () => ({
-            type: 'postgres',
-            database: options.database,
-            host: options.host,
-            port: options.port,
-            username: options.username,
-            password: options.password,
-            synchronize: false, // not recommended on production
-            logging: true,
-            entities: entities,
+            ...config,
             autoLoadEntities: false,
-            namingStrategy: new SnakeNamingStrategy(),
-            migrations: [__dirname + '/migrations/*{.ts,.js}'],
-            migrationsRun: false,
-            migrationsTransactionMode: 'each',
-            migrationsTableName: 'migrations_table',
           }),
+          dataSourceFactory: async () => {
+            return dataSourceRepository.initialize();
+          },
         }),
         TypeOrmModule.forFeature(entities),
       ],
       providers: [
         {
-          provide: I_USER_REPOSITORY,
-          useClass: UserRepository,
+          provide: I_ACCOUNT_REPOSITORY,
+          useClass: AccountRepository,
         },
         {
           provide: I_POST_REPOSITORY,
           useClass: PostRepository,
         },
       ],
-      exports: [I_USER_REPOSITORY, I_POST_REPOSITORY],
+      exports: [I_ACCOUNT_REPOSITORY, I_POST_REPOSITORY],
       module: RepositoriesModule,
     };
   }

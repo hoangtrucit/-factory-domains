@@ -6,7 +6,7 @@ import {
   ManyToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { UserEntity } from './user.entity';
+import { AccountEntity } from './account.entity';
 import { AbstractEntity } from './abstract.entity';
 
 @Entity({ name: 'post' })
@@ -20,7 +20,7 @@ export class PostEntity extends AbstractEntity<PostEntity> {
   @Column({ type: 'uuid', name: 'created_by' })
   createdBy: string;
 
-  @ManyToMany(() => UserEntity, (item) => item.posts)
+  @ManyToMany(() => AccountEntity, (item) => item.posts)
   @JoinTable({
     name: 'post_like',
     joinColumn: {
@@ -28,9 +28,9 @@ export class PostEntity extends AbstractEntity<PostEntity> {
       referencedColumnName: 'id',
     },
     inverseJoinColumn: {
-      name: 'user_id',
+      name: 'account_id',
       referencedColumnName: 'id',
     },
   })
-  users: UserEntity[];
+  accounts: AccountEntity[];
 }

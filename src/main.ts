@@ -1,13 +1,9 @@
-import { INestMicroservice, ValidationPipe } from '@nestjs/common';
+import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import { getGRPC } from './helpers/setup';
 
 async function bootstrap() {
-  const app: INestMicroservice = await NestFactory.createMicroservice(
-    AppModule,
-    getGRPC(),
-  );
+  const app = await NestFactory.create(AppModule);
 
   app.useGlobalPipes(
     new ValidationPipe({
@@ -17,7 +13,7 @@ async function bootstrap() {
     }),
   );
 
-  await app.listen().then(() => {
+  await app.listen(process.env.PORT, '0.0.0.0').then(() => {
     console.log(
       `start ${process.env.SERVICE_NAME} at port ${process.env.PORT}`,
     );

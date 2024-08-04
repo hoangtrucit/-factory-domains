@@ -1,0 +1,18 @@
+version: '3.7'
+services:
+  db:
+    container_name: factory_domain
+    image: postgres:14.1-alpine
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=pwd
+      - POSTGRES_DB=factory_domain
+    volumes:
+      - factory_domain_data:/var/lib/postgresql/data
+      - ./scripts/init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - 45321:5432
+
+volumes:
+  factory_domain_data:

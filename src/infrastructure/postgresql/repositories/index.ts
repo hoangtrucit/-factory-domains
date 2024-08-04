@@ -1,6 +1,6 @@
 import { PostRepository } from './post.repository';
-import { UserRepository } from './user.repository';
+import { AccountRepository } from './account.repository';
 
-export default [UserRepository, PostRepository];
+export default [AccountRepository, PostRepository];
 
-export { UserRepository, PostRepository };
+export { AccountRepository as UserRepository, PostRepository };

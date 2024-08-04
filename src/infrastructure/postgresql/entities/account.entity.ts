@@ -3,8 +3,8 @@ import { Column, Entity, ManyToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { PostEntity } from './post.entity';
 import { AbstractEntity } from './abstract.entity';
 
-@Entity({ name: 'user' })
-export class UserEntity extends AbstractEntity<UserEntity> {
+@Entity({ name: 'account' })
+export class AccountEntity extends AbstractEntity<AccountEntity> {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
@@ -20,6 +20,6 @@ export class UserEntity extends AbstractEntity<UserEntity> {
   @Column({ type: 'numeric', name: 'age' })
   age: number;
 
-  @ManyToMany(() => PostEntity, (item) => item.users)
+  @ManyToMany(() => PostEntity, (item) => item.accounts)
   posts: PostEntity[];
 }
