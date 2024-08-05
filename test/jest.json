@@ -9,7 +9,9 @@
   "testTimeout": 90000,
   "moduleNameMapper": {
     "^src/(.*)": "<rootDir>/src/$1",
-    "^src": "<rootDir>/src",
     "^test/(.*)": "<rootDir>/test/$1"
-  }
+  },
+  "coverageDirectory": "./report/coverage",
+  "globalSetup": "./scripts/db.start.ts",
+  "globalTeardown": "./scripts/db.down.ts"
 }

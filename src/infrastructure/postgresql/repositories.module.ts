@@ -27,7 +27,7 @@ export class RepositoriesModule {
         username: options.username,
         password: options.password,
         synchronize: false,
-        logging: true,
+        logging: false,
         entities: entities,
         namingStrategy: new SnakeNamingStrategy(),
         migrations: [__dirname + '/migrations/*{.ts,.js}'],

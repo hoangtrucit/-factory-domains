@@ -7,7 +7,7 @@ import { AbstractRepository, IRepository } from './abstract.repository';
 import { dataSourceRepository } from '../datasource';
 import { AccountEntity } from '../entities/account.entity';
 
-export const I_ACCOUNT_REPOSITORY = 'I_USER_REPOSITORY';
+export const I_ACCOUNT_REPOSITORY = 'I_ACCOUNT_REPOSITORY';
 
 export interface IAccountRepository extends IRepository<AccountEntity> {
   getAccounts: () => Promise<AccountEntity[]>;

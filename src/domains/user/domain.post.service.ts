@@ -18,7 +18,7 @@ export class PostService {
     //
   }
 
-  async update(id: string, payload: UpdatePostDTO): Promise<PostEntity> {
+  async update(id: string, payload: UpdatePostDTO): Promise<PostEntity[]> {
     const queryRunner = this.postRepository.getDataSource().createQueryRunner();
     await queryRunner.connect();
     await queryRunner.startTransaction();
