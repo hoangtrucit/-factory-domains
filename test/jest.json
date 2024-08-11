@@ -11,7 +11,5 @@
     "^src/(.*)": "<rootDir>/src/$1",
     "^test/(.*)": "<rootDir>/test/$1"
   },
-  "coverageDirectory": "./report/coverage",
-  "globalSetup": "./scripts/db.start.ts",
-  "globalTeardown": "./scripts/db.down.ts"
+  "coverageDirectory": "./report/coverage"
 }
