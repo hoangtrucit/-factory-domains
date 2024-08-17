@@ -18,6 +18,7 @@ exports[`Search DTO Request should validate failure with object 1`] = `
           "description": 1000,
           "moduleNo": 10,
           "remark": "remark",
+          "title": "title",
         },
         "value": 1000,
       },
@@ -35,6 +36,7 @@ exports[`Search DTO Request should validate failure with object 1`] = `
           "description": 1000,
           "moduleNo": 10,
           "remark": "remark",
+          "title": "title",
         },
         "value": 10,
       },
@@ -49,6 +51,7 @@ exports[`Search DTO Request should validate failure with object 1`] = `
         "description": 1000,
         "moduleNo": 10,
         "remark": "remark",
+        "title": "title",
       },
       "sort": SortArgs {
         "decidedAt": true,
@@ -65,76 +68,7 @@ exports[`Search DTO Request should validate failure with object 1`] = `
       "description": 1000,
       "moduleNo": 10,
       "remark": "remark",
-    },
-  },
-]
-`;
-
-exports[`Search DTO should validate failure with object 1`] = `
-[
-  ValidationError {
-    "children": [
-      ValidationError {
-        "children": [],
-        "constraints": {
-          "isString": "description must be a string",
-        },
-        "property": "description",
-        "target": SearchArgs {
-          "decidedAt": RangeDateArgs {
-            "from": 2023-01-31T17:00:00.000Z,
-            "to": 2024-01-31T17:00:00.000Z,
-          },
-          "description": 1000,
-          "moduleNo": 10,
-          "remark": "remark",
-        },
-        "value": 1000,
-      },
-      ValidationError {
-        "children": [],
-        "constraints": {
-          "isString": "moduleNo must be a string",
-        },
-        "property": "moduleNo",
-        "target": SearchArgs {
-          "decidedAt": RangeDateArgs {
-            "from": 2023-01-31T17:00:00.000Z,
-            "to": 2024-01-31T17:00:00.000Z,
-          },
-          "description": 1000,
-          "moduleNo": 10,
-          "remark": "remark",
-        },
-        "value": 10,
-      },
-    ],
-    "property": "search",
-    "target": SearchRequest {
-      "search": SearchArgs {
-        "decidedAt": RangeDateArgs {
-          "from": 2023-01-31T17:00:00.000Z,
-          "to": 2024-01-31T17:00:00.000Z,
-        },
-        "description": 1000,
-        "moduleNo": 10,
-        "remark": "remark",
-      },
-      "sort": SortArgs {
-        "decidedAt": true,
-        "description": true,
-        "moduleNo": true,
-        "status": true,
-      },
-    },
-    "value": SearchArgs {
-      "decidedAt": RangeDateArgs {
-        "from": 2023-01-31T17:00:00.000Z,
-        "to": 2024-01-31T17:00:00.000Z,
-      },
-      "description": 1000,
-      "moduleNo": 10,
-      "remark": "remark",
+      "title": "title",
     },
   },
 ]

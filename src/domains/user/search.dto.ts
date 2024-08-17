@@ -10,6 +10,7 @@ import {
   ValidationOptions,
   ValidationArguments,
 } from 'class-validator';
+import { IPostEntity } from 'src/infrastructure/postgresql/entities/post.entity';
 
 // custom decorator validate range date
 export function RangeDateValidator(
@@ -53,6 +54,7 @@ export interface ISearch {
   moduleNo?: string | undefined;
   remark?: string | undefined;
   decidedAt?: IRangeDate | undefined;
+  title?: string | undefined;
 }
 
 export class RangeDateArgs {
@@ -117,6 +119,12 @@ export class SearchArgs implements ISearch {
   @ValidateNested()
   @Expose()
   decidedAt?: RangeDateArgs;
+
+  @IsOptional()
+  @IsDefined()
+  @Type(() => String)
+  @Expose()
+  title?: string;
 }
 
 export class SearchRequest {
@@ -138,22 +146,32 @@ export class SearchRequest {
   sort?: SortArgs;
 }
 
+// @Exclude()
+// export class SearchResponse implements Omit<ISearch, 'decidedAt'> {
+//   @Expose()
+//   description: string;
+
+//   @Expose()
+//   moduleNo: string;
+
+//   @Expose()
+//   remark: string;
+
+//   @Expose()
+//   @Transform((item) => item.value.toISOString(), { toPlainOnly: true })
+//   decidedAt: Date;
+
+//   @Expose()
+//   @Transform((item) => item.value.split(','), { toPlainOnly: true })
+//   ids: string;
+// }
+
 @Exclude()
-export class SearchResponse implements Omit<ISearch, 'decidedAt'> {
+export class SearchResponse implements Partial<IPostEntity> {
   @Expose()
-  description: string;
+  id: string;
 
   @Expose()
-  moduleNo: string;
-
-  @Expose()
-  remark: string;
-
-  @Expose()
-  @Transform((item) => item.value.toISOString(), { toPlainOnly: true })
-  decidedAt: Date;
-
-  @Expose()
-  @Transform((item) => item.value.split(','), { toPlainOnly: true })
-  ids: string;
+  @Transform((item) => `title: ${item.value}`, { toPlainOnly: true })
+  title: string;
 }

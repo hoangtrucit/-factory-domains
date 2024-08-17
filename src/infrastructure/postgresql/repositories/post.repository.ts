@@ -9,7 +9,9 @@ import { dataSourceRepository } from '../datasource';
 
 export const I_POST_REPOSITORY = 'I_POST_REPOSITORY';
 
-export interface IPostRepository extends IRepository<PostEntity> {}
+export interface IPostRepository extends IRepository<PostEntity> {
+  searchPost(keyword: string): Promise<PostEntity[]>;
+}
 
 @Injectable()
 export class PostRepository
@@ -21,5 +23,12 @@ export class PostRepository
     repository: Repository<PostEntity>,
   ) {
     super(repository, dataSourceRepository);
+  }
+
+  public async searchPost(keyword: string): Promise<PostEntity[]> {
+    return await this.getRepository()
+      .createQueryBuilder('post')
+      .andWhere('post.title like :title', { title: `%${keyword}%` })
+      .getMany();
   }
 }

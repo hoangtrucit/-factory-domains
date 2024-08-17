@@ -121,15 +121,15 @@ describe('Search DTO', () => {
         excludeExtraneousValues: true,
       });
 
-      // console.log(
-      //   '🚀🚀🚀 file: search.dto.test.ts [line 119] instnace',
-      //   instance.ids,
-      // );
       // instance -> plain
-      expect(instanceToPlain(instance)).toStrictEqual({
-        ...MOCK_RESPONSE_OBJECT,
-        ids: MOCK_RESPONSE_OBJECT.ids.split(','),
-      });
+      expect(instanceToPlain(instance)).toStrictEqual(
+        instanceToPlain(
+          plainToInstance(SearchResponse, MOCK_RESPONSE_OBJECT, {
+            exposeDefaultValues: true,
+            excludeExtraneousValues: true,
+          }),
+        ),
+      );
     });
   });
 });

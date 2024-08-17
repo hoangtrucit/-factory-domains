@@ -9,8 +9,18 @@ import {
 import { AccountEntity } from './account.entity';
 import { AbstractEntity } from './abstract.entity';
 
+export interface IPostEntity {
+  id: string;
+  title: string;
+  createdBy: string;
+  accounts: AccountEntity[];
+}
+
 @Entity({ name: 'post' })
-export class PostEntity extends AbstractEntity<PostEntity> {
+export class PostEntity
+  extends AbstractEntity<PostEntity>
+  implements IPostEntity
+{
   @PrimaryGeneratedColumn('uuid')
   id: string;
 

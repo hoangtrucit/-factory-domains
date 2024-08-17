@@ -15,6 +15,7 @@ export const MOCK_SEARCH_DATA_STATIC: SearchRequest = {
       from: new Date(2023, 1, 1),
       to: new Date(2024, 1, 1),
     },
+    title: 'title',
   },
   sort: {
     decidedAt: true,
@@ -34,6 +35,7 @@ export const MOCK_SEARCH_DATA: SearchRequest = {
       from: faker.date.past(),
       to: faker.date.future(),
     },
+    title: faker.string.alpha({ length: 10 }),
   },
   sort: {
     decidedAt: true,
@@ -52,6 +54,7 @@ MOCK_SEARCH_ARGS.decidedAt = {
 MOCK_SEARCH_ARGS.description = faker.string.alpha({ length: 20 });
 MOCK_SEARCH_ARGS.moduleNo = faker.string.alpha({ length: 20 });
 MOCK_SEARCH_ARGS.remark = faker.string.alpha({ length: 20 });
+MOCK_SEARCH_ARGS.title = faker.string.alpha({ length: 10 });
 
 // instance of class
 const MOCK_SORT_ARGS = new SortArgs();

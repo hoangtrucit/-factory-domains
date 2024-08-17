@@ -1,39 +1,36 @@
-// @ts-nocheck
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { SearchRequest, SearchResponse } from './search.dto';
+import {
+  I_POST_REPOSITORY,
+  IPostRepository,
+} from 'src/infrastructure/postgresql/repositories/post.repository';
 
 export const SEARCH_TOKEN_SERVICE = 'SEARCH MODULE SEARCH_TOKEN_SERVICE';
 
 @Injectable()
 export class SearchService {
-  constructor() {
+  constructor(
+    @Inject(I_POST_REPOSITORY)
+    private readonly postRepository: IPostRepository,
+  ) {
     //
   }
 
-  async get(payload: SearchRequest): Promise<SearchResponse> {
-    // console.log(
-    //   '🚀🚀🚀 file: domain.search.service.ts [line 13]',
-    //   JSON.stringify(payload, null, 4),
-    // );
-    const instance = new SearchResponse();
-    instance.description = 'description';
-    instance.moduleNo = 'moduleNo';
-    instance.remark = 'remark';
-    instance.decidedAt = new Date();
-    instance.ids = 'id1,id2,id3';
-    instance.username = 'username';
-    instance.password = 'password';
-
-    return Promise.resolve(instance);
-
-    // return Promise.resolve({
-    //   description: 'description',
-    //   moduleNo: 'moduleNo',
-    //   remark: 'remark',
-    //   decidedAt: new Date(),
-    //   ids: 'id1,id2,id3',
-    //   username: 'username',
-    //   password: 'password',
-    // });
+  // return with Entity
+  async get(payload: SearchRequest): Promise<SearchResponse[]> {
+    return await this.postRepository.searchPost(payload?.search?.title || '');
   }
+
+  // return with class-transform without Inteceptor
+  // async get(payload: SearchRequest): Promise<SearchResponse[]> {
+  //   const result = await this.postRepository.searchPost(
+  //     payload?.search?.title || '',
+  //   );
+
+  //   console.log('🚀🚀🚀 file: domain.search.service.ts [line 37] ', result);
+
+  //   return plainToInstance(SearchResponse, result, {
+  //     excludeExtraneousValues: true,
+  //   });
+  // }
 }

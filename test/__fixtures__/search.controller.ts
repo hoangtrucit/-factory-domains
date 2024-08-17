@@ -1,16 +1,23 @@
+import { faker } from '@faker-js/faker/locale/af_ZA';
 import { SearchResponse } from 'src/domains/user/search.dto';
-
-export const MOCK_RESPONSE_INSTANCE = new SearchResponse();
-MOCK_RESPONSE_INSTANCE.description = 'my description';
-MOCK_RESPONSE_INSTANCE.moduleNo = 'my moduleNo';
-MOCK_RESPONSE_INSTANCE.remark = 'my remark';
-MOCK_RESPONSE_INSTANCE.decidedAt = new Date(2023, 1, 1);
-MOCK_RESPONSE_INSTANCE.ids = 'id1,id2,id3';
+import { PostEntity } from 'src/infrastructure/postgresql/entities';
 
 export const MOCK_RESPONSE_OBJECT: SearchResponse = {
-  description: 'description',
-  moduleNo: 'moduleNo',
-  remark: 'remark',
-  decidedAt: new Date(),
-  ids: 'id1,id2,id3',
+  id: 'e98d05d2-c014-40bb-aef9-cc9ea6aa5663',
+  title: 'title',
 };
+
+export const MOCK_POST_ENTITIES: PostEntity[] = [
+  new PostEntity({
+    id: faker.string.uuid(),
+    title: faker.lorem.sentence(),
+    createdBy: faker.string.uuid(),
+    accounts: [],
+  }),
+  new PostEntity({
+    id: faker.string.uuid(),
+    title: faker.lorem.sentence(),
+    createdBy: faker.string.uuid(),
+    accounts: [],
+  }),
+];
